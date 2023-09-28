@@ -1,0 +1,79 @@
+{
+  "version": "1.2",
+  "schemaShortName": "NYPD-Complaints",
+  "schemaUrl": "/schema",
+  "chartingSchemesUrl": "/charting-schemes",
+  "defaultValues": {
+    "timeZoneId": "Europe/London",
+    "resultIdsPersistent": true
+  },
+  "services": [
+    {
+      "id": "nypd-service",
+      "name": "NYPD Connector: Get all",
+      "description": "A service that retrieves all data.",
+      "acquireUrl": "/all"
+    },
+    {
+      "id": "nypd-search-service",
+      "name": "NYPD Connector: Search",
+      "description": "A service for conditional searches.",
+      "clientConfigId": "searchForm",
+      "acquireUrl": "/search",
+      "validateUrl": "/search/validate"
+    }
+  ],
+  "clientConfigs": [
+    {
+      "id": "searchForm",
+      "type": "FORM",
+      "config": {
+        "mandatory": true,
+        "sections": [
+          {
+            "conditions": [
+              {
+                "id": "boro_nm",
+                "label": "Borough Name",
+                "logicalType": "SELECTED_FROM",
+                "possibleValues": [
+                  {
+                    "value": "BROOKLYN"
+                  },
+                  {
+                    "value": "BRONX"
+                  },
+                  {
+                    "value": "MANHATTAN"
+                  },
+                  {
+                    "value": "QUEENS"
+                  },
+                  {
+                    "value": "STATEN ISLAND"
+                  }
+                ]
+              },
+              {
+                "id": "law_cat_cd",
+                "label": "Law Category",
+                "logicalType": "SELECTED_FROM",
+                "possibleValues": [
+                  {
+                    "value": "FELONY"
+                  },
+                  {
+                    "value": "MISDEMEANOR"
+                  },
+                  {
+                    "value": "VIOLATION"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
