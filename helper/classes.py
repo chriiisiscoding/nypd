@@ -73,6 +73,15 @@ class Link(ResponseBaseData):
         self.fromEndId = fromEndId
         self.toEndId = toEndId
         self.linkDirection = linkDirection
+        
+        
+def generate_source_identifier(entry):
+    return {
+        'sourceId': {
+            'type': 'NYPD',
+            'key': [entry.get('law_cat_cd'), entry.get('addr_pct_cd', ''), entry.get('cmplnt_num')]
+        }
+    }
 
 class Complaint(Entity):
     """
@@ -82,7 +91,7 @@ class Complaint(Entity):
         entry (dict): One record from the external datasource.
     """
     def __init__(self, entry):
-        id = get_id("COMP", entry)
+        id = generate_source_identifier(entry)
         super().__init__(id, type_ids['complaint'], {
             'PT1': entry.get('cmplnt_num'),
             'PT2': entry.get('cmplnt_fr_dt')[:10] if entry.get('cmplnt_fr_dt') else None,

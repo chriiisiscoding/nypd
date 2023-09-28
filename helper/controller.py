@@ -28,7 +28,7 @@ from helper.service import (query_external_datasource, marshal, build_params,
 
 controller = Blueprint('config', __name__)
 connector_major_version = '1'
-connector_minor_version = '2'
+connector_minor_version = '0'
 
 @controller.route('/config')
 def config():
